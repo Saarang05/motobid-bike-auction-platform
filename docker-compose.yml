@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-local-dev-change-this-secret}
+      DATABASE_URL: sqlite:////app/instance/auction.db
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@bikeauction.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-ChangeMe123!}
+    volumes:
+      - auction_data:/app/instance
+    restart: unless-stopped
+volumes:
+  auction_data:
